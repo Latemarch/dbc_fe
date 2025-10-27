@@ -1,65 +1,75 @@
-import Image from "next/image";
+import MarkdownContainer from "@/components/MarkdownContainer";
 
 export default function Home() {
+  const markdownContent = `# AI 챗 응답 예시
+
+이것은 **마크다운** 형식의 AI 응답입니다.
+
+## 코드 블록 예시
+
+JavaScript 코드:
+
+\`\`\`javascript
+function greetUser(name) {
+  return \`Hello, \${name}! Welcome to the AI Chat.\`;
+}
+
+const message = greetUser("사용자");
+console.log(message);
+\`\`\`
+
+Python 코드:
+
+\`\`\`python
+def calculate_sum(numbers):
+    """숫자 리스트의 합을 계산합니다."""
+    return sum(numbers)
+
+result = calculate_sum([1, 2, 3, 4, 5])
+print(f"합계: {result}")
+\`\`\`
+
+## 리스트 예시
+
+장점:
+- 빠른 응답 시간
+- 정확한 정보 제공
+- 다양한 형식 지원
+
+순서가 있는 목록:
+1. 첫 번째 단계
+2. 두 번째 단계
+3. 세 번째 단계
+
+## 인용문
+
+> "코드는 사람이 읽을 수 있어야 하며, 우연히 컴퓨터에서 실행될 수 있어야 한다."
+> 
+> — 마틴 파울러
+
+## 인라인 코드와 강조
+
+이 컴포넌트는 \`MarkdownContainer\`를 사용하여 렌더링됩니다. **React**와 **TypeScript**로 구현되었습니다.
+
+## 테이블
+
+| 기능 | 설명 | 상태 |
+|------|------|------|
+| 코드 하이라이팅 | \`rehype-highlight\` 사용 | ✅ 완료 |
+| GFM 지원 | \`remark-gfm\` 사용 | ✅ 완료 |
+| 커스텀 스타일링 | Tailwind CSS 적용 | ✅ 완료 |
+
+## 더 많은 정보
+
+자세한 내용은 [문서](https://example.com)를 참고하세요.
+
+---
+
+이 마크다운은 AI 챗 응답에 사용됩니다.`;
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="min-h-screen p-8">
+      <MarkdownContainer content={markdownContent} />
     </div>
   );
 }
