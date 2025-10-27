@@ -1,4 +1,6 @@
 import MarkdownContainer from "@/components/MarkdownContainer";
+import ThemeToggle from "@/components/ThemeToggle";
+import ExampleQuery from "@/components/ExampleQuery";
 
 export default function Home() {
   const markdownContent = `# AI 챗 응답 예시
@@ -68,8 +70,16 @@ print(f"합계: {result}")
 이 마크다운은 AI 챗 응답에 사용됩니다.`;
 
   return (
-    <div className="min-h-screen p-8">
-      <MarkdownContainer content={markdownContent} />
-    </div>
+    <>
+      <ThemeToggle />
+      <div className="min-h-screen p-8 space-y-8">
+        <div>
+          <MarkdownContainer content={markdownContent} />
+        </div>
+        <div>
+          <ExampleQuery />
+        </div>
+      </div>
+    </>
   );
 }
