@@ -1,0 +1,109 @@
+{
+  "personal_info": {
+    "name": "개발자",
+    "position": "프론트엔드 개발자",
+    "total_experience": "1년 7개월",
+    "introduction": "통계물리를 전공하고 연구 생활을 하다, 개발자의 길로 전향한 경력2년의 프론트엔드 개발자입니다. 새로운 기술을 배우는 데 익숙하고 저항감 없이 시도합니다."
+  },
+  "education": {
+    "degree": "대학원(석사) 졸업",
+    "university": "가톨릭대학교(성심)",
+    "major": "통계물리",
+    "period": "2013.09 ~ 2016.02",
+    "gpa": "4.38/4.5",
+    "location": "경기",
+    "thesis": "표현형의 요동이 유전적 고정에 미치는 영향"
+  },
+  "work_experience": [
+    {
+      "company": "데이터사이언스랩",
+      "position": "개발 연구원",
+      "period": "2023.08 ~ 2025.02",
+      "duration": "1년 7개월",
+      "department": "웹개발",
+      "role": "프론트엔드",
+      "responsibilities": [
+        "프론트엔드 프로젝트 구성 및 전반적인 업무",
+        "D3.js를 이용한 데이터 시각화 담당",
+        "D3.js, Deck.gl을 이용한 지도 시각화 담당"
+      ],
+      "deployment": [
+        "Docker를 이용한 프론트 엔드 프로젝트 배포",
+        "Jenkins를 이용한 배포 자동화",
+        "Mysql + Next.js를 이용한 임시 서버(로깅, 목서버) 운영"
+      ],
+      "projects": [
+        {
+          "name": "경기도 데이터드림 - 경기도 생활인구 상황판",
+          "url": "https://www.webasp.kr",
+          "description": "프로젝트 아키텍처 구성 : next.js 앱 구성, 유저 + 사용통계, gitlab",
+          "role": "gis 페이지 담당 : D3.js, Deck.gl",
+          "deployment": "Docker compose, jenkins"
+        },
+        {
+          "name": "KT PLIP",
+          "url": "https://bigsight.kt.com/bdip/components/portal/index.html#/portal/intro/alp",
+          "description": "gis 페이지에서 지도 시각화 담당 (Deck.gl)"
+        }
+      ]
+    }
+  ],
+  "skills": {
+    "frontend": [
+      "Next.js",
+      "D3.js",
+      "deck.gl",
+      "JavaScript",
+      "TypeScript",
+      "React.js",
+      "Tailwind CSS"
+    ],
+    "backend": ["Node.js", "MySQL", "MyBatis", "Redis", "RestAPI", "Prisma"],
+    "devops": ["Docker Compose", "Git", "Jenkins"]
+  },
+  "specializations": [
+    "D3.js를 이용한 데이터 시각화",
+    "Deck.gl을 통한 지도 시각화",
+    "프론트엔드 프로젝트 구성",
+    "Docker 환경 구성",
+    "배포 자동화"
+  ],
+  "personal_projects": [
+    {
+      "name": "D3.js 커스텀 캔들 차트 구현",
+      "url": "https://brunch.co.kr/@993679fb217e4e4/8",
+      "description": "개인적으로 진행 중인 프로젝트"
+    },
+    {
+      "name": "자동매매 백테스트 환경 구축",
+      "url": "https://brunch.co.kr/@993679fb217e4e4/7",
+      "description": "MySQL을 Docker 환경에서 구성하고 Prisma를 이용해 DB를 연동하는 풀스택 개발"
+    }
+  ],
+  "leadership_experience": {
+    "role": "소규모 개발팀의 리드(5인)",
+    "responsibilities": [
+      "팀원 업무 배정 및 관리",
+      "부서 간 협업 진행",
+      "프로젝트 완성 과정 포괄적 경험"
+    ],
+    "tech_stack": [
+      "Next.js",
+      "Java",
+      "opensearch",
+      "Docker compose",
+      "jenkins",
+      "langgraph"
+    ]
+  },
+  "current_interests": [
+    "개인 프로젝트 진행",
+    "AI 코딩 툴을 적극 활용하여 생산성 향상",
+    "langgraph를 활용한 AI agent 개발"
+  ],
+  "development_philosophy": [
+    "모듈화와 간소한 코드 작성",
+    "데이터 흐름을 우선한 개발 지향",
+    "새로운 기술 습득에 적극적"
+  ]
+}
