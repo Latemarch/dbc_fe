@@ -3,7 +3,11 @@
 import { useQuery } from "@tanstack/react-query";
 
 interface ContentsResponse {
-  posts: { [key: string]: { [key: string]: { title: string } } };
+  posts: {
+    [key: string]: {
+      [key: string]: { title: string; body: string; id: string };
+    };
+  };
   projects: { [key: string]: { [key: string]: string } };
 }
 

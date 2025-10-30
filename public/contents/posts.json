@@ -13,22 +13,11 @@
       "title": "Get Server Side Props",
       "id": "getserversideprops"
     },
-    "restarchitectureandapi": {
-      "title": "REST 아키텍처와 API",
-      "id": "restarchitectureandapi"
-    },
-    "react-query": { "title": "Reqct Query", "id": "reactquery" },
-    "javascriptexecutionbehavior": {
+    "ecma": {
       "title": "자바스크립트 동작방식",
-      "id": "javascriptexecutionbehavior"
+      "id": "ecma"
     },
-    "executioncontext": {
-      "title": "Execution Context",
-      "id": "executioncontext"
-    },
-    "domaininputafter": { "title": "도메인 입력후", "id": "domaininputafter" },
     "restful-api": { "title": "RESTful API", "id": "restful-api" },
-    "ecma": { "title": "ECMA", "id": "ecma" },
     "restarchitecture": {
       "title": "REST Architecture",
       "id": "restarchitecture"
@@ -37,9 +26,9 @@
       "title": "도메인 입력후",
       "id": "afterdomain-network"
     },
-    "excution-context": {
+    "execution-context": {
       "title": "Execution Context",
-      "id": "excution-context"
+      "id": "execution-context"
     },
     "object": { "title": "Object", "id": "object" }
   },
