@@ -34,15 +34,15 @@ export default function ChatInput({ onSubmit }: ChatInputProps) {
       onSubmit={handleSubmit}
       className="p-2 items-center dark:border-gray-700"
     >
-      <div className="flex gap-1">
+      <div className="flex gap-1 bg-[#303030]">
         <div className="flex-1 relative">
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="메시지를 입력하세요... (Shift+Enter로 줄바꿈)"
-            className="w-full px-4 h-12 p-2 scrollbar-hide border border-gray-300 dark:border-gray-600 rounded-lg 
-                     bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
+            className="w-full px-4 h-12 p-2 scrollbar-hide dark:border-gray-600 rounded-lg drop-shadow-lg 
+                     bg-[#303030] dark:bg-chat text-gray-900 dark:text-gray-100
                      placeholder-gray-400 dark:placeholder-gray-500
                      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
                      resize-none max-h-32 overflow-y-auto"
