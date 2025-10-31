@@ -2,12 +2,26 @@
 
 import { useQuery } from "@tanstack/react-query";
 
+export interface PostSummary {
+  title: string;
+  id: string;
+}
+
+export interface PostDetail {
+  title: string;
+  body: string;
+  id: string;
+  author?: string;
+  category?: string;
+  createdAt?: number;
+  description?: string;
+  tags?: string[];
+}
+
 interface ContentsResponse {
   posts: {
-    [key: string]: {
-      [key: string]: { title: string; body: string; id: string };
-    };
-  };
+    posts_list: { [key: string]: PostSummary };
+  } & { [key: string]: PostDetail | { [key: string]: PostSummary } };
   projects: { [key: string]: { [key: string]: string } };
 }
 

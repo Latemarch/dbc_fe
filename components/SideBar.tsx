@@ -10,12 +10,6 @@ export default function SideBar() {
     null
   );
 
-  React.useEffect(() => {
-    console.log(selectedContent);
-    if (contents && selectedContent) {
-      console.log(contents.posts[selectedContent]?.body);
-    }
-  }, [selectedContent]);
   if (!contents) {
     return <div>Loading...</div>;
   }
@@ -55,9 +49,7 @@ export default function SideBar() {
         </p>
       </div>
       {selectedContent && (
-        <ContentsContainer
-          selectedContent={contents.posts[selectedContent]?.body}
-        />
+        <ContentsContainer selectedContent={contents.posts[selectedContent]} />
       )}
     </div>
   );
