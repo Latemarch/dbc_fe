@@ -1,8 +1,9 @@
 "use client";
 
-import { useContentsData } from "@/hooks/useContents";
+import { PostDetail, useContentsData } from "@/hooks/useContents";
 import * as React from "react";
 import ContentsContainer from "./ContentsContainer";
+import { FiSidebar } from "react-icons/fi";
 
 export default function SideBar() {
   const { data: contents } = useContentsData();
@@ -18,7 +19,9 @@ export default function SideBar() {
   return (
     <div className="flex flex-row h-full ">
       <div className="flex flex-col h-full p-4 bg-sidebar min-w-52 ">
-        <div>hh</div>
+        <div className="flex justify-end">
+          <FiSidebar />
+        </div>
         <h2 className="font-bold text-lg my-2">Posts</h2>
         <p className="flex flex-col gap-2">
           {Object.entries(posts.posts_list).map(([key, value]) => (
@@ -49,7 +52,9 @@ export default function SideBar() {
         </p>
       </div>
       {selectedContent && (
-        <ContentsContainer selectedContent={contents.posts[selectedContent]} />
+        <ContentsContainer
+          selectedContent={contents.posts[selectedContent] as PostDetail}
+        />
       )}
     </div>
   );
