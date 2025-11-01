@@ -18,11 +18,12 @@ export interface PostDetail {
   tags?: string[];
 }
 
-interface ContentsResponse {
+export interface ContentsResponse {
   posts: {
     posts_list: { [key: string]: PostSummary };
   } & { [key: string]: PostDetail | { [key: string]: PostSummary } };
   projects: { [key: string]: { [key: string]: string } };
+  resume: string;
 }
 
 async function fetchContents(): Promise<ContentsResponse> {

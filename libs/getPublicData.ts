@@ -7,7 +7,13 @@ export function saveJson(data: unknown, filename = "output.json") {
 }
 
 export function getContents(name: string) {
-  const filePath = path.join(process.cwd(), "public", "contents", name);
-  const file = fs.readFileSync(filePath, "utf8");
-  return JSON.parse(file);
+  if (name.endsWith(".json")) {
+    const filePath = path.join(process.cwd(), "public", "contents", name);
+    const file = fs.readFileSync(filePath, "utf8");
+    return JSON.parse(file);
+  } else {
+    const filePath = path.join(process.cwd(), "public", "contents", name);
+    const file = fs.readFileSync(filePath, "utf8");
+    return file;
+  }
 }

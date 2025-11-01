@@ -5,7 +5,8 @@ export async function GET() {
   try {
     const posts = getContents("posts.json");
     const projects = getContents("projects.json");
-    const contents = { posts, projects };
+    const resume = getContents("resume.md");
+    const contents = { posts, projects, resume };
     return NextResponse.json(contents, { status: 200 });
   } catch (error) {
     console.error("Error reading contents:", error);
