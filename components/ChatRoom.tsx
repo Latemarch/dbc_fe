@@ -1,3 +1,4 @@
+"use client";
 import ChatInput from "./ChatInput";
 
 export default function ChatRoom() {

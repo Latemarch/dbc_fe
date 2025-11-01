@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent, KeyboardEvent } from "react";
+import { VscSend } from "react-icons/vsc";
 
 interface ChatInputProps {
   onSubmit?: (message: string) => void;
@@ -30,37 +31,35 @@ export default function ChatInput({ onSubmit }: ChatInputProps) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="p-2 items-center dark:border-gray-700"
-    >
-      <div className="flex gap-1 bg-[#303030]">
-        <div className="flex-1 relative">
+    <form onSubmit={handleSubmit} className="p-2 items-center">
+      <div className="flex gap-1 bg-chat rounded-full drop-shadow-lg">
+        <div className="flex flex-1 p-1 relative items-center">
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="메시지를 입력하세요... (Shift+Enter로 줄바꿈)"
-            className="w-full px-4 h-12 p-2 scrollbar-hide dark:border-gray-600 rounded-lg drop-shadow-lg 
-                     bg-[#303030] dark:bg-chat text-gray-900 dark:text-gray-100
-                     placeholder-gray-400 dark:placeholder-gray-500
-                     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+            className="w-full px-4 h-12 p-2 scrollbar-hide 
+                     text-gray-900 dark:text-gray-100 
+                     focus:outline-none placeholder-gray-400 dark:placeholder-gray-500
                      resize-none max-h-32 overflow-y-auto"
             rows={1}
           />
-          <div className="absolute bottom-2 right-2 text-xs text-gray-400 dark:text-gray-500">
+          {/* <div className="absolute bottom-2 right-2 text-xs text-gray-400 dark:text-gray-500">
             Shift+Enter: 줄바꿈
-          </div>
-        </div>
-        <button
-          type="submit"
-          disabled={!message.trim()}
-          className=" bg-blue-600 hover:bg-blue-700 
+          </div> */}
+          <button
+            type="submit"
+            disabled={!message.trim()}
+            className=" bg-blue-600 hover:bg-blue-700 
                    disabled:bg-gray-300 dark:disabled:bg-gray-600
                    disabled:cursor-not-allowed
-                   text-white rounded-lg transition-colors h-12
+                   text-white rounded-full transition-colors h-12
                    flex items-center justify-center min-w-12"
-        ></button>
+          >
+            <VscSend />
+          </button>
+        </div>
       </div>
     </form>
   );
