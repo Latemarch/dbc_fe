@@ -14,8 +14,8 @@ export default function SideBar({
   contents: ContentsResponse;
 }) {
   return (
-    <div className="flex flex-row h-full ">
-      <div className="flex flex-col h-full p-4 w-40 bg-sidebar min-w-52 ">
+    <div className="flex flex-row h-full flex-shrink-0">
+      <div className="flex flex-col h-full p-4 bg-sidebar min-w-52 flex-shrink-0">
         <div className="flex justify-end">
           <FiSidebar />
         </div>

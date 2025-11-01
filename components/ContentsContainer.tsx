@@ -55,7 +55,7 @@ export default function ContentsContainer({
     <div className="flex h-full">
       {/* 컨텐츠 영역 */}
       <div
-        className="overflow-y-auto p-4 h-full flex-shrink-0"
+        className="overflow-y-auto h-full flex-shrink-0"
         style={{ width: `${containerWidth}px` }}
       >
         {typeof selectedContent !== "string" && (

@@ -25,7 +25,7 @@ export default function LeftSide() {
   }, [selectedContent, contents]);
   if (!contents) return null;
   return (
-    <div className="flex h-full bg-sidebar min-w-52 flex-row">
+    <div className="flex h-full bg-sidebar min-w-52 flex-row flex-shrink-0">
       <SideBar
         setSelectedContent={setSelectedContent}
         selectedContent={selectedContent}
