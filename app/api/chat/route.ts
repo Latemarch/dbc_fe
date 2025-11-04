@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
         }),
       }
     );
-
+    console.log("backendResponse", backendResponse);
     if (!backendResponse.ok) {
       const errorText = await backendResponse.text();
       let errorData;
