@@ -6,6 +6,7 @@ import Chatbubble from "./Chatbubble";
 export default function ChatBubbles() {
   const { messages } = useConversationStore();
 
+  console.log(messages);
   return (
     <div className="flex flex-col gap-2">
       {messages.map((message) => (

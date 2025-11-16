@@ -65,9 +65,20 @@ export default function ChatRoom() {
 
   return (
     <div className="flex flex-col h-full max-w-4xl min-w-40 w-full">
-      <div className="flex-1 overflow-y-auto p-4">
+      <div
+        className="flex-1 overflow-y-auto p-4"
+        style={{ scrollBehavior: "smooth" }}
+        ref={React.useRef<HTMLDivElement>(null)}
+      >
         <ChatBubbles />
         {isLoading && <Chatbubble message={reply} role="assistant" />}
+        <div
+          ref={(el) => {
+            if (el) {
+              el.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+        />
       </div>
       <ChatInput onSubmit={onSubmit} disabled={isLoading} />
     </div>

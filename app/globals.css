@@ -29,3 +29,31 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: #6b6e7a;
 }
+
+/* Loading animation - 점프하는 스피너 */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-12px);
+    opacity: 1;
+  }
+}
+
+.dot-bounce-1 {
+  animation: bounce 1.2s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.dot-bounce-2 {
+  animation: bounce 1.2s ease-in-out infinite;
+  animation-delay: 0.15s;
+}
+
+.dot-bounce-3 {
+  animation: bounce 1.2s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
