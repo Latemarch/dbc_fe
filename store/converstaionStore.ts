@@ -1,29 +1,28 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface Conversation {
-  id: string;
-  messages: Message[];
-}
-
-interface Message {
+export interface Message {
   message: string;
   role: "user" | "assistant";
 }
 
 interface ConversationStore {
-  conversation: Conversation[];
-  addConversation: (conversation: Conversation) => void;
+  messages: Message[];
+  addMessage: (message: Message) => void;
+  threadId: string | null;
+  setThreadId: (threadId: string | null) => void;
 }
 
 export const useConversationStore = create<ConversationStore>()(
   persist(
     (set) => ({
-      conversation: [],
-      addConversation: (conversation) =>
+      messages: [],
+      addMessage: (message) =>
         set((state) => ({
-          conversation: [...state.conversation, conversation],
+          messages: [...state.messages, message],
         })),
+      threadId: null,
+      setThreadId: (threadId) => set({ threadId }),
     }),
     {
       name: "conversation-storage",

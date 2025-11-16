@@ -16,7 +16,8 @@ export default function SideBar({
   return (
     <div className="flex flex-row h-full flex-shrink-0">
       <div className="flex flex-col h-full p-4 bg-sidebar min-w-52 flex-shrink-0">
-        <div className="flex justify-end">
+        <div className="flex justify-between items-center">
+          <h2 className="font-bold text-lg my-2">Appendix</h2>
           <FiSidebar />
         </div>
         <h2

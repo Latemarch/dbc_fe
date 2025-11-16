@@ -1,5 +1,9 @@
 "use client";
 
+import MarkdownContainer from "./MarkdownContainer";
+
 export default function LastMessage({ lastMessage }: { lastMessage: string }) {
-  return <div className="text-gray-500 dark:text-gray-400">{lastMessage}</div>;
+  console.log(lastMessage);
+
+  return <MarkdownContainer content={lastMessage} />;
 }

@@ -17,7 +17,7 @@ export default function ContentsContainer({
       if (!isResizing) return;
 
       // SideBar의 왼쪽 목록 영역 너비 (min-w-52 = 208px)
-      const sidebarListWidth = 208;
+      const sidebarListWidth = 272;
       const mouseX = e.clientX;
 
       // ContentsContainer의 새로운 너비 계산

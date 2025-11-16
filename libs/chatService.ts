@@ -1,124 +1,105 @@
 interface ChatServiceCallbacks {
-  onStart: () => void;
   onUpdate: (text: string) => void;
-  onError: (error: string) => void;
   onComplete: () => void;
 }
 
-interface ChatRequest {
-  question: string;
-  thread_id: string;
-}
-
 /**
- * 스트리밍 채팅 메시지를 처리하는 서비스 함수
- * @param message 사용자 메시지
- * @param threadId 대화 스레드 ID
- * @param callbacks 상태 업데이트 콜백 함수들
+ * 스트리밍 채팅 메시지를 전송하고 처리
  */
 export async function sendChatMessage(
   message: string,
   threadId: string,
   callbacks: ChatServiceCallbacks
 ): Promise<void> {
-  const { onStart, onUpdate, onError, onComplete } = callbacks;
+  const { onUpdate, onComplete } = callbacks;
 
-  if (!message.trim()) {
+  const response = await fetch("/api/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      question: message,
+      thread_id: threadId,
+    }),
+  });
+
+  if (!response.body) {
+    onComplete();
     return;
   }
 
-  onStart();
+  // 스트림 청크 처리 함수: thread_id JSON 제거 및 데이터 정제
+  function processStreamChunk(chunk: string): string {
+    if (!chunk.trim()) return "";
 
-  try {
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        question: message,
-        thread_id: threadId,
-      } as ChatRequest),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({
-        error: "응답을 받아올 수 없습니다.",
-      }));
-      onError(
-        `오류: ${errorData.error || "알 수 없는 오류가 발생했습니다."}`
-      );
-      onComplete();
-      return;
-    }
-
-    if (!response.body) {
-      onError("오류: 스트림 응답을 받을 수 없습니다.");
-      onComplete();
-      return;
-    }
-
-    // ReadableStream을 읽어서 스트림 데이터 처리
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let accumulatedText = "";
-
-    while (true) {
-      const { done, value } = await reader.read();
-
-      if (done) {
-        onComplete();
-        break;
+    // thread_id가 포함된 JSON 객체 제거
+    try {
+      const jsonData = JSON.parse(chunk);
+      if (jsonData.thread_id) {
+        return ""; // thread_id가 있으면 제거
       }
+      // JSON이지만 thread_id가 없으면 문자열로 변환
+      return JSON.stringify(jsonData);
+    } catch {
+      // JSON이 아니면 그대로 반환 (마크다운 텍스트)
+      return chunk;
+    }
+  }
 
-      // 청크 데이터 디코딩
-      const chunk = decoder.decode(value, { stream: true });
-      const lines = chunk.split("\n");
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let accumulatedText = "";
+  let buffer = "";
 
-      for (const line of lines) {
-        // SSE 형식: "data: {content}" 또는 "data: [DONE]"
-        if (line.startsWith("data: ")) {
-          const data = line.slice(6); // "data: " 제거
+  while (true) {
+    const { done, value } = await reader.read();
 
-          if (data === "[DONE]") {
-            onComplete();
-            return;
-          }
+    if (done) {
+      // 버퍼에 남은 데이터 처리
+      if (buffer.trim()) {
+        const processed = processStreamChunk(buffer);
+        if (processed) {
+          accumulatedText += processed;
+          onUpdate(accumulatedText);
+        }
+      }
+      onComplete();
+      break;
+    }
 
-          // JSON 형식의 데이터 파싱 시도 (thread_id 등)
-          if (data.startsWith("{")) {
-            try {
-              JSON.parse(data);
-              // thread_id 같은 메타데이터는 무시하고 메시지만 처리
-              continue;
-            } catch {
-              // JSON 파싱 실패 시 일반 텍스트로 처리
-            }
-          }
+    const chunk = decoder.decode(value, { stream: true });
+    buffer += chunk;
+    const lines = buffer.split("\n");
 
-          // 에러 메시지 확인
-          if (data.startsWith("Error: ")) {
-            onError(data);
-            onComplete();
-            return;
-          }
+    // 마지막 라인은 완전하지 않을 수 있으므로 버퍼에 보관
+    buffer = lines.pop() || "";
 
-          // 일반 텍스트 데이터 누적
-          accumulatedText += data;
+    for (const line of lines) {
+      if (!line.trim()) continue;
+
+      // SSE 형식 처리 (data: 접두사)
+      if (line.startsWith("data: ")) {
+        const data = line.slice(6).trim();
+
+        if (data === "[DONE]") {
+          onComplete();
+          return;
+        }
+
+        const processed = processStreamChunk(data);
+        if (processed) {
+          accumulatedText += processed;
+          onUpdate(accumulatedText);
+        }
+      } else {
+        // SSE 형식이 아닌 경우 직접 처리
+        const processed = processStreamChunk(line);
+        if (processed) {
+          accumulatedText += processed;
           onUpdate(accumulatedText);
         }
       }
     }
-  } catch (error) {
-    console.error("Error in sendChatMessage:", error);
-    onError(
-      `오류: ${
-        error instanceof Error
-          ? error.message
-          : "알 수 없는 오류가 발생했습니다."
-      }`
-    );
-    onComplete();
   }
 }
-
