@@ -15,9 +15,6 @@ export default function SideBar({
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
-  React.useEffect(() => {
-    console.log(isSidebarOpen);
-  }, [isSidebarOpen]);
   return (
     <div className="flex flex-row h-full flex-shrink-0">
       <div className="flex flex-col h-full bg-sidebar p-4">

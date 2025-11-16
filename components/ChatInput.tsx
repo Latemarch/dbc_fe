@@ -27,7 +27,6 @@ export default function ChatInput({
       return;
 
     isSubmitting.current = true;
-    console.log("message submit", message);
     onSubmit(message);
     setMessage("");
 

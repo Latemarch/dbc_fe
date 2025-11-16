@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
         }),
       }
     );
-    console.log("backendResponse", backendResponse);
+    // console.log("backendResponse", backendResponse);
     if (!backendResponse.ok) {
       const errorText = await backendResponse.text();
       let errorData;
@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error("Error in chat API route:", error);
+    // console.error("Error in chat API route:", error);
     return new Response(
       JSON.stringify({
         error: error instanceof Error ? error.message : "Internal server error",
