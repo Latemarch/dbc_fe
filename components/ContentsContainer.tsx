@@ -3,11 +3,14 @@
 import { PostDetail } from "@/hooks/useContents";
 import MarkdownContainer from "./MarkdownContainer";
 import { useState, useEffect } from "react";
+import { BiLeftArrowAlt } from "react-icons/bi";
 
 export default function ContentsContainer({
   selectedContent,
+  setSelectedContent,
 }: {
   selectedContent: PostDetail | string;
+  setSelectedContent: (content: string | null) => void;
 }) {
   const [containerWidth, setContainerWidth] = useState(600); // 기본값 600px
   const [isResizing, setIsResizing] = useState(false);
@@ -52,12 +55,20 @@ export default function ContentsContainer({
   }, [isResizing]);
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-full p-4">
       {/* 컨텐츠 영역 */}
       <div
         className="overflow-y-auto h-full flex-shrink-0"
         style={{ width: `${containerWidth}px` }}
       >
+        <div className="flex flex-row w-full justify-end items-center">
+          <div
+            onClick={() => setSelectedContent(null)}
+            className="text-xl text-gray-300 hover:text-white cursor-pointer m-2"
+          >
+            <BiLeftArrowAlt />
+          </div>
+        </div>
         {typeof selectedContent !== "string" && (
           <MarkdownContainer content={"# " + selectedContent.title} />
         )}

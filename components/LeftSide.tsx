@@ -32,7 +32,10 @@ export default function LeftSide() {
         contents={contents}
       />
       {content && selectedContent && (
-        <ContentsContainer selectedContent={content} />
+        <ContentsContainer
+          selectedContent={content}
+          setSelectedContent={setSelectedContent}
+        />
       )}
     </div>
   );
