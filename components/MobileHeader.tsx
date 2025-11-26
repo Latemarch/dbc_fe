@@ -17,7 +17,7 @@ export default function MobileHeader({
 
   return (
     <div
-      className={`absolute flex-row w-full drop-shadow-lg bg-sidebar flex-shrink-0 ${
+      className={`fixed flex-row w-full drop-shadow-lg bg-sidebar flex-shrink-0 ${
         isSidebarOpen ? "bg-sidebar" : ""
       }`}
     >
