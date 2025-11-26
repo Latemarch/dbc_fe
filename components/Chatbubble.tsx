@@ -9,7 +9,6 @@ export default function Chatbubble({
   message: string;
   role: "user" | "assistant";
 }) {
-  console.log(message);
   return (
     <div className={`rounded-lg p-2 ${role === "user" ? "bg-chat" : ""}`}>
       {message ? (
