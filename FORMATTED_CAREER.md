@@ -1,37 +1,7 @@
-"use client";
+# 개발자 소개
 
-import { useConversationStore } from "@/store/converstaionStore";
-import Chatbubble from "./Chatbubble";
+안녕하세요! 개발자를 소개할 수 있는 기회를 주셔서 감사합니다. 아래는 개발자의 커리어에 대한 간략한 보고서입니다.
 
-export default function ChatBubbles() {
-  const { messages } = useConversationStore();
-
-  return (
-    <div className="flex flex-col gap-2">
-      {!messages.length && (
-        <div className="text-sm text-gray-500 dark:text-gray-400 flex justify-center items-center h-full">
-          <span>개발자에 대해 궁금한 점을 질문해 보세요.</span>
-        </div>
-      )}
-      {messages.map((message) => (
-        <div
-          key={message.message}
-          className={`p-1 ${
-            message.role === "user" ? "self-end" : "self-start"
-          }`}
-        >
-          <Chatbubble message={message.message} role={message.role} />
-        </div>
-      ))}
-      {/* <Chatbubble message={sample} role="assistant" /> */}
-    </div>
-  );
-}
-
-
-const sample = `# 개발자 소개
-
-안녕하세요! 개발자를 소개할 수 있는 기회를 주셔서 감사합니다. 아래는 개발자의 커리어에 대한 간략한 보고서입니다. 
 ## 커리어 내러티브
 
 ### 소개
@@ -87,4 +57,4 @@ const sample = `# 개발자 소개
 > 이 내러티브는 개발자의 전문적인 여정을 요약할 뿐만 아니라 그들의 독특한 배경, 회복력 및 지속적인 성장에 대한 헌신을 강조합니다. 개인적 동기와 직업적 목표가 서로 얽혀 있다는 사실은 그들을 어떤 조직에게도 귀중한 자산으로 만들 것입니다.
 
 더 궁금한 점이나 추가적인 질문이 있다면 언제든지 말씀해 주세요!
-`
+

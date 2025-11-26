@@ -4,6 +4,40 @@ interface ChatServiceCallbacks {
 }
 
 /**
+ * 마크다운 요소 앞에 줄바꿈이 없으면 추가하는 정규화 함수
+ */
+function normalizeMarkdown(text: string): string {
+  if (!text) return text;
+
+  let normalized = text;
+
+  // 제목 앞에 줄바꿈 추가 (#, ##, ###, ####, #####, ######)
+  // 단, 이미 줄바꿈이 있거나 텍스트 시작 부분이 아닌 경우에만
+  normalized = normalized.replace(/([^\n])(#{1,6}\s)/g, "$1\n$2");
+
+  // 리스트 항목 앞에 줄바꿈 추가 (-, *, +)
+  normalized = normalized.replace(/([^\n])([-*+]\s)/g, "$1\n$2");
+
+  // 숫자 리스트 앞에 줄바꿈 추가 (1., 2., 등)
+  normalized = normalized.replace(/([^\n])(\d+\.\s)/g, "$1\n$2");
+
+  // 인용구 앞에 줄바꿈 추가 (>)
+  normalized = normalized.replace(/([^\n])(>\s)/g, "$1\n$2");
+
+  // 코드 블록 앞에 줄바꿈 추가 (```)
+  normalized = normalized.replace(/([^\n])(```)/g, "$1\n$2");
+
+  // 수평선 앞에 줄바꿈 추가 (---, ***)
+  normalized = normalized.replace(/([^\n])(---|\*\*\*)/g, "$1\n$2");
+
+  // 테이블 시작 앞에 줄바꿈 추가 (| 헤더 |)
+  // 단, 이미 줄바꿈이 있는 경우는 제외
+  normalized = normalized.replace(/([^\n])(\|[^\n]*\|)/g, "$1\n$2");
+
+  return normalized;
+}
+
+/**
  * 스트리밍 채팅 메시지를 전송하고 처리
  */
 export async function sendChatMessage(
@@ -61,7 +95,7 @@ export async function sendChatMessage(
         const processed = processStreamChunk(buffer);
         if (processed) {
           accumulatedText += processed;
-          onUpdate(accumulatedText);
+          onUpdate(normalizeMarkdown(accumulatedText));
         }
       }
       onComplete();
@@ -90,14 +124,14 @@ export async function sendChatMessage(
         const processed = processStreamChunk(data);
         if (processed) {
           accumulatedText += processed;
-          onUpdate(accumulatedText);
+          onUpdate(normalizeMarkdown(accumulatedText));
         }
       } else {
         // SSE 형식이 아닌 경우 직접 처리
         const processed = processStreamChunk(line);
         if (processed) {
           accumulatedText += processed;
-          onUpdate(accumulatedText);
+          onUpdate(normalizeMarkdown(accumulatedText));
         }
       }
     }
