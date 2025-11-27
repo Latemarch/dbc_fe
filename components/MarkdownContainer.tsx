@@ -160,6 +160,10 @@ export default function MarkdownContainer({
         .markdown-container em {
           font-style: italic;
         }
+
+        .markdown-container > *:last-child {
+          margin-bottom: 0 !important;
+        }
       `}</style>
     </div>
   );
