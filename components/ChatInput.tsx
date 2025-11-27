@@ -77,7 +77,7 @@ export default function ChatInput({
   return (
     <form onSubmit={handleSubmit} className="p-2 items-center">
       <div className="flex gap-1 bg-chat rounded-full drop-shadow-lg">
-        <div className="flex flex-1 p-1 relative items-center">
+        <div className="text-sm flex flex-1 p-1 relative items-center">
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}

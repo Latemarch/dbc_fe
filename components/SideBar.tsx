@@ -68,7 +68,7 @@ export default function SideBar({
             <div className="border-t border-gray-500 my-2" />
             <h2 className="font-bold text-lg my-2">Projects</h2>
             {contents && (
-              <p className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2">
                 {Object.entries(contents.projects).map(([key, value]) => (
                   <div
                     key={key}
@@ -77,7 +77,7 @@ export default function SideBar({
                     {value.title}
                   </div>
                 ))}
-              </p>
+              </div>
             )}
           </>
         )}
