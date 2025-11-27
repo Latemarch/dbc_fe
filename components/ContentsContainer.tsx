@@ -2,7 +2,7 @@
 
 import { PostDetail } from "@/hooks/useContents";
 import MarkdownContainer from "./MarkdownContainer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BiLeftArrowAlt } from "react-icons/bi";
 
 export default function ContentsContainer({
@@ -14,21 +14,19 @@ export default function ContentsContainer({
 }) {
   const [containerWidth, setContainerWidth] = useState(600); // 기본값 600px
   const [isResizing, setIsResizing] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const startLeftRef = useRef<number>(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isResizing) return;
+      if (!isResizing || !containerRef.current) return;
 
-      // SideBar의 왼쪽 목록 영역 너비 (min-w-52 = 208px)
-      const sidebarListWidth = 272;
       const mouseX = e.clientX;
-
-      // ContentsContainer의 새로운 너비 계산
-      // 마우스 X 좌표에서 SideBar 목록 너비를 빼면 ContentsContainer의 오른쪽 끝 위치
-      const newWidth = mouseX - sidebarListWidth;
+      // 컨테이너의 왼쪽 시작점에서 마우스 위치까지의 거리 = 새로운 너비
+      const newWidth = mouseX - startLeftRef.current;
 
       const minWidth = 300;
-      const maxWidth = window.innerWidth - sidebarListWidth - 300; // 최소한의 여백 확보
+      const maxWidth = window.innerWidth - startLeftRef.current - 300; // 최소한의 여백 확보
 
       if (newWidth >= minWidth && newWidth <= maxWidth) {
         setContainerWidth(newWidth);
@@ -54,10 +52,21 @@ export default function ContentsContainer({
     };
   }, [isResizing]);
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (containerRef.current) {
+      // 리사이징 시작 시 컨테이너의 왼쪽 시작점 저장
+      const rect = containerRef.current.getBoundingClientRect();
+      startLeftRef.current = rect.left;
+      setIsResizing(true);
+    }
+  };
+
   return (
     <div className="flex h-full p-4">
       {/* 컨텐츠 영역 */}
       <div
+        ref={containerRef}
         className="overflow-y-auto h-full flex-shrink-0"
         style={{ width: `${containerWidth}px` }}
       >
@@ -85,10 +94,7 @@ export default function ContentsContainer({
       {/* 드래그 핸들 (오른쪽 끝) */}
       <div
         className="flex-shrink-0 relative group"
-        onMouseDown={(e) => {
-          e.preventDefault();
-          setIsResizing(true);
-        }}
+        onMouseDown={handleMouseDown}
       >
         {/* 실제 보이는 핸들 */}
         {/* <div className="w-[1px] bg-gray-600 hover:bg-blue-500 cursor-col-resize transition-colors h-full" /> */}
