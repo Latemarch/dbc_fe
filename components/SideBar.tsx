@@ -20,7 +20,7 @@ export default function SideBar({
       <div className="flex flex-col h-full bg-sidebar p-4">
         <div className="flex justify-between items-center ">
           {isSidebarOpen && (
-            <span className="font-bold text-xl ">Appendix</span>
+            <span className="font-bold text-xl ">References</span>
           )}
           <div
             className="cursor-pointer h-8 flex items-center justify-center"

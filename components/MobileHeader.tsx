@@ -1,30 +1,39 @@
 "use client";
 
-import { ContentsResponse } from "@/hooks/useContents";
+import { ContentsResponse, PostDetail } from "@/hooks/useContents";
 import * as React from "react";
 import { FiSidebar } from "react-icons/fi";
+import MobileContentsContainer from "./MobileContentsContainer";
 
 export default function MobileHeader({
   setSelectedContent,
   selectedContent,
   contents,
+  content,
 }: {
   setSelectedContent: React.Dispatch<React.SetStateAction<string | null>>;
   selectedContent: string | null;
   contents: ContentsResponse;
+  content: string | PostDetail | null;
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
   return (
     <div
-      className={`fixed flex-row w-full drop-shadow-lg bg-sidebar flex-shrink-0 ${
-        isSidebarOpen ? "bg-sidebar" : ""
+      className={`fixed flex-row w-full z-50 drop-shadow-lg bg-sidebar flex-shrink-0 ${
+        isSidebarOpen ? "bg-sidebar h-dvh" : ""
       }`}
     >
       <div className="flex flex-col h-full p-1">
         <div className="flex justify-between items-center ">
           {isSidebarOpen && (
-            <span className="font-bold text-xl ">Appendix</span>
+            <span className="font-bold text-xl ">References</span>
+          )}
+          {selectedContent && content && (
+            <MobileContentsContainer
+              selectedContent={content}
+              setSelectedContent={setSelectedContent}
+            />
           )}
           <div
             className="cursor-pointer h-8 flex items-center justify-center"
@@ -48,7 +57,7 @@ export default function MobileHeader({
             <div className="border-t border-gray-500 my-2" />
             <h2 className="font-bold text-lg my-2">Posts</h2>
             {contents && (
-              <p className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2">
                 {Object.entries(contents.posts.posts_list).map(
                   ([key, value]) => (
                     <div
@@ -67,12 +76,12 @@ export default function MobileHeader({
                     </div>
                   )
                 )}
-              </p>
+              </div>
             )}
             <div className="border-t border-gray-500 my-2" />
             <h2 className="font-bold text-lg my-2">Projects</h2>
             {contents && (
-              <p className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2">
                 {Object.entries(contents.projects).map(([key, value]) => (
                   <div
                     key={key}
@@ -81,7 +90,7 @@ export default function MobileHeader({
                     {value.title}
                   </div>
                 ))}
-              </p>
+              </div>
             )}
           </div>
         )}
@@ -89,6 +98,12 @@ export default function MobileHeader({
       {/* {selectedContent && contents && (
         <ContentsContainer
           selectedContent={contents.posts[selectedContent] as PostDetail}
+        />
+      )} */}
+      {/* {selectedContent && content && (
+        <MobileContentsContainer
+          selectedContent={content}
+          setSelectedContent={setSelectedContent}
         />
       )} */}
     </div>

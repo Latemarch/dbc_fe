@@ -5,6 +5,7 @@ import ContentsContainer from "./ContentsContainer";
 import SideBar from "./SideBar";
 import * as React from "react";
 import MobileHeader from "./MobileHeader";
+import MobileContentsContainer from "./MobileContentsContainer";
 
 export default function LeftSide() {
   const [selectedContent, setSelectedContent] = React.useState<string | null>(
@@ -80,14 +81,21 @@ export default function LeftSide() {
           setSelectedContent={setSelectedContent}
           selectedContent={selectedContent}
           contents={contents}
+          content={content}
         />
       )}
-      {content && selectedContent && (
+      {content && selectedContent && isDesktop && (
         <ContentsContainer
           selectedContent={content}
           setSelectedContent={setSelectedContent}
         />
       )}
+      {/* {content && selectedContent && !isDesktop && (
+        <MobileContentsContainer
+          selectedContent={content}
+          setSelectedContent={setSelectedContent}
+        />
+      )} */}
     </div>
   );
 }
