@@ -73,6 +73,11 @@ export default function SideBar({
                   <div
                     key={key}
                     className="text-sm text-gray-300 hover:text-white cursor-pointer"
+                    onClick={() => {
+                      if (value.url) {
+                        window.open(value.url, "_blank", "noopener,noreferrer");
+                      }
+                    }}
                   >
                     {value.title}
                   </div>
