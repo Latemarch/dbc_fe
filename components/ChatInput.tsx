@@ -76,6 +76,9 @@ export default function ChatInput({
 
   return (
     <form onSubmit={handleSubmit} className="p-2 items-center">
+      <p className="pl-4 text-xs text-gray-500 dark:text-gray-500">
+        대화 내용은 더 나은 답변을 위해 익명으로 저장됩니다.
+      </p>
       <div className="flex gap-1 bg-chat rounded-full drop-shadow-lg">
         <div className="text-sm flex flex-1 p-1 relative items-center">
           <textarea
